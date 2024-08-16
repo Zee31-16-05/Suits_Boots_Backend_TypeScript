@@ -118,12 +118,12 @@ const deleteUserById = (req, res) => __awaiter(void 0, void 0, void 0, function*
                 reject(err);
                 res.status(500).json(err);
             });
-            console.log("result: ", result);
         });
+        console.log("result: ", result);
     }
     catch (err) {
-        console.log("error came in deleteUserById function...", err);
-        // res.status(500).json(err)
+        console.log("error came in deleteUserById function...", err.stack);
+        res.status(500).json(err);
     }
 });
 exports.deleteUserById = deleteUserById;

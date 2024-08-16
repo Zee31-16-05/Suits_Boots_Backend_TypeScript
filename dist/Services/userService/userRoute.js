@@ -41,4 +41,7 @@ router.get('/get-user/:id', (req, res) => {
     // console.log("what is retruning...",typeof userController.getAllUsers(req, res));
     return userController.getSpecificUserById(req, res);
 });
+router.delete('/delete-user/:id', (req, res) => {
+    return userController.deleteUserById(req, res);
+});
 exports.default = router;

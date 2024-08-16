@@ -131,13 +131,15 @@ export const deleteUserById = async(req: Request, res:Response): Promise<void>=>
                 res.status(500).json(err)
                 
             })
-            console.log("result: ", result);
             
         })
+        console.log("result: ", result);
+
     }
-    catch(err){
-        console.log("error came in deleteUserById function...",err);
-        // res.status(500).json(err)
+    catch(err:any){
+        console.log("error came in deleteUserById function...",err.stack);
+        res.status(500).json(err)
         
     }
 }
+
