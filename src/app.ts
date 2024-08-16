@@ -4,8 +4,8 @@ console.table("its working fine now----");
 import express, {Request, Response} from "express";
 import connection from './DatabaseConnection/dbConnection'
 import  userRoute from './Services/userService/userRoute'
-console.log("connection",typeof userRoute)
-console.log("connection",userRoute)
+// console.log("connection",typeof userRoute)
+// console.log("connection",userRoute)
 
 const app = express();
 const PORT = 8080;

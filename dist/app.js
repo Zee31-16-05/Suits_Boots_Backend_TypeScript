@@ -7,8 +7,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 console.table("its working fine now----");
 const express_1 = __importDefault(require("express"));
 const userRoute_1 = __importDefault(require("./Services/userService/userRoute"));
-console.log("connection", typeof userRoute_1.default);
-console.log("connection", userRoute_1.default);
+// console.log("connection",typeof userRoute)
+// console.log("connection",userRoute)
 const app = (0, express_1.default)();
 const PORT = 8080;
 const Hostname = 'localhost';

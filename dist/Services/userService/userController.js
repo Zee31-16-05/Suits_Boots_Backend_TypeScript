@@ -12,10 +12,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addUser = void 0;
+exports.deleteUserById = exports.getSpecificUserById = exports.getAllUsers = exports.addUser = void 0;
 const dbConnection_1 = __importDefault(require("../../DatabaseConnection/dbConnection"));
 const queries_1 = __importDefault(require("../Queries/queries"));
-const { createUser } = queries_1.default;
+const { createUser, readUsers, getUserById, deleteUser } = queries_1.default;
 const addUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         console.log("entered in adding user API--");
@@ -38,7 +38,7 @@ const addUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 res.status(200).json(result); // Respond with the result
             })
                 .catch(err => {
-                console.log("Error came from addUser API", err.stack);
+                console.log("Error came from add-User API", err.stack);
                 reject(err);
                 res.status(500).json({ error: err.message });
             });
@@ -51,3 +51,79 @@ const addUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.addUser = addUser;
+const getAllUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("my request: ", req.body);
+    const connection = yield (0, dbConnection_1.default)(); // Await the connection
+    const [result, fields] = yield new Promise((resolve, reject) => {
+        connection.query(readUsers)
+            .then(([result, fields]) => {
+            console.log("my data inside then", result);
+            resolve([result, fields]);
+            res.status(200).json(result);
+        })
+            .catch(err => {
+            console.log("my error", err.stack);
+            reject(err);
+            res.status(500).json(err);
+        });
+    });
+    console.log("my data....", result);
+});
+exports.getAllUsers = getAllUsers;
+const getSpecificUserById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        console.log("my request: ", req.params);
+        const connection = yield (0, dbConnection_1.default)(); // Await the connection
+        const reqParamsData = req.params;
+        console.log("reqParamsData: ", reqParamsData);
+        const paramsData = Object.values(reqParamsData);
+        console.log("paramsData: ", paramsData);
+        const [result, fields] = yield new Promise((resolve, reject) => {
+            connection.query(getUserById, paramsData)
+                .then(([result, fields]) => {
+                console.log("my result: ", result);
+                resolve([result, fields]);
+                res.status(200).json(result);
+            })
+                .catch(err => {
+                console.log("entered in catch...", err);
+                reject(err);
+                res.status(500).json(err);
+            });
+            console.log("my result: ", result);
+        });
+    }
+    catch (err) {
+        console.log("error came in getSpecificUserById function...", err);
+        res.status(500).json(err);
+    }
+});
+exports.getSpecificUserById = getSpecificUserById;
+const deleteUserById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        console.log("my request: ", req.params);
+        const connection = yield (0, dbConnection_1.default)(); // Await the connection
+        const reqParamsData = req.params;
+        console.log("reqParamsData: ", reqParamsData);
+        const paramsData = Object.values(reqParamsData);
+        console.log("paramsData: ", paramsData);
+        const [result, fields] = yield new Promise((resolve, reject) => {
+            connection.query(deleteUser, paramsData)
+                .then(([result, fields]) => {
+                resolve([result, fields]);
+                res.status(200).json(result);
+            })
+                .catch(err => {
+                console.log("entered in catch...", err);
+                reject(err);
+                res.status(500).json(err);
+            });
+            console.log("result: ", result);
+        });
+    }
+    catch (err) {
+        console.log("error came in deleteUserById function...", err);
+        // res.status(500).json(err)
+    }
+});
+exports.deleteUserById = deleteUserById;
