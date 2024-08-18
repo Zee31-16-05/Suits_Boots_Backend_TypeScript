@@ -1,12 +1,13 @@
 import mysql, { FieldPacket, ResultSetHeader, RowDataPacket } from "mysql2"
-import { User } from "../Interfaces/userInterface"
+import { User } from "../../Interfaces/userInterface"
 import createConnection from "../../DatabaseConnection/dbConnection"
-import queries from "../Queries/queries"
+import queries from "../../Queries/queries"
 import { Request, Response } from 'express';
 import { resolve } from "path";
 import { rejects } from "assert";
 import { error } from "console";
 const { createUser,readUsers,getUserById,deleteUser } = queries
+
 
 export const addUser = async (req: Request, res: Response): Promise<void> => {
     try {
@@ -57,8 +58,8 @@ export const getAllUsers = async(req: Request, res: Response): Promise<void>=>{
     console.log("my request: ", req.body)
     const connection = await createConnection(); // Await the connection
 
-    const [result,fields] : [any,FieldPacket[]] =  await  new Promise((resolve,reject)=>{
-        connection.query(readUsers)
+    const [result,fields] : [User[],FieldPacket[]] =  await  new Promise((resolve,reject)=>{
+        connection.query<User[]>(readUsers)
         .then(([result,fields])=>{
             console.log("my data inside then",result);
             resolve([result,fields]);
@@ -85,8 +86,8 @@ export const getSpecificUserById = async(req:Request, res:Response) : Promise<vo
         const paramsData = Object.values(reqParamsData)
         console.log("paramsData: ", paramsData);
 
-        const [result,fields] : [any,FieldPacket[]] = await new Promise((resolve, reject) =>{
-            connection.query(getUserById,paramsData)
+        const [result,fields] : [User[],FieldPacket[]] = await new Promise((resolve, reject) =>{
+            connection.query<User[]>(getUserById,paramsData)
             .then(([result,fields])=>{
                 console.log("my result: ", result);
                 resolve([result,fields]);
@@ -119,8 +120,8 @@ export const deleteUserById = async(req: Request, res:Response): Promise<void>=>
         const paramsData = Object.values(reqParamsData)
         console.log("paramsData: ", paramsData);
         
-        const[result,fields] : [any,FieldPacket[]] = await new Promise((resolve, reject) =>{
-            connection.query(deleteUser, paramsData)
+        const[result,fields] : [User[],FieldPacket[]] = await new Promise((resolve, reject) =>{
+            connection.query<User[]>(deleteUser, paramsData)
             .then(([result,fields]) =>{
                 resolve([result,fields]);
                 res.status(200).json(result)
@@ -142,4 +143,5 @@ export const deleteUserById = async(req: Request, res:Response): Promise<void>=>
         
     }
 }
+
 

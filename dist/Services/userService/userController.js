@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteUserById = exports.getSpecificUserById = exports.getAllUsers = exports.addUser = void 0;
 const dbConnection_1 = __importDefault(require("../../DatabaseConnection/dbConnection"));
-const queries_1 = __importDefault(require("../Queries/queries"));
+const queries_1 = __importDefault(require("../../Queries/queries"));
 const { createUser, readUsers, getUserById, deleteUser } = queries_1.default;
 const addUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
