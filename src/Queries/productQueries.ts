@@ -5,11 +5,11 @@ export const createProduct : string = `INSERT INTO products(product_id, category
 
 export const readAllProducts : string = `SELECT * FROM products`;
 
-export const readProductsById : string = `SELECT * FROM products WHERE id = ?`;
+export const readProductsById : string = `SELECT * FROM products WHERE product_id = ?`;
 
-export const readProductsByName : string = `SELECT * FROM products  WHERE name = ?`;
+export const readProductsByName : string = `SELECT * FROM products  WHERE title = ?`;
 
-export const deleteProductById : string = `DELETE FROM products WHERE id = ?`;
+export const deleteProductById : string = `DELETE FROM products WHERE product_id = ?`;
 
 export const updateProductById = (data: Product)=>{
     const setClause = Object.keys(data).map(field=> `${field} = ?`).join(', ');

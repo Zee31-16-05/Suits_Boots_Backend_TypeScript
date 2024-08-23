@@ -4,9 +4,9 @@ exports.updateProductById = exports.deleteProductById = exports.readProductsByNa
 exports.createProduct = `INSERT INTO products(product_id, category_id,title,description,price,quantity) 
                                         VALUES(?,?,?,?,?,?)`;
 exports.readAllProducts = `SELECT * FROM products`;
-exports.readProductsById = `SELECT * FROM products WHERE id = ?`;
-exports.readProductsByName = `SELECT * FROM products  WHERE name = ?`;
-exports.deleteProductById = `DELETE FROM products WHERE id = ?`;
+exports.readProductsById = `SELECT * FROM products WHERE product_id = ?`;
+exports.readProductsByName = `SELECT * FROM products  WHERE title = ?`;
+exports.deleteProductById = `DELETE FROM products WHERE product_id = ?`;
 const updateProductById = (data) => {
     const setClause = Object.keys(data).map(field => `${field} = ?`).join(', ');
     return `UPDATE products set ${setClause} WHERE id = ?`;

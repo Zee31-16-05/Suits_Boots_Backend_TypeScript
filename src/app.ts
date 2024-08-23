@@ -5,6 +5,7 @@ import express, {Request, Response} from "express";
 import connection from './DatabaseConnection/dbConnection'
 import  userRoute from './Services/userService/userRoute'
 import categoryRoute from "./Services/categoryService/categoryRoute"
+import productRoute from "./Services/productService/productRoute"
 // console.log("connection",typeof userRoute)
 // console.log("connection",userRoute)
 
@@ -15,6 +16,7 @@ app.use(express.json())
 
 app.use('/userService',userRoute)
 app.use('/categoryService',categoryRoute)
+app.use('/productService',productRoute)
 
 app.listen(PORT,()=>{
     console.table([`listening on ${Hostname}: ${PORT}`]);
