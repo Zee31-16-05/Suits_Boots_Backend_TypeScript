@@ -9,6 +9,7 @@ const express_1 = __importDefault(require("express"));
 const userRoute_1 = __importDefault(require("./Services/userService/userRoute"));
 const categoryRoute_1 = __importDefault(require("./Services/categoryService/categoryRoute"));
 const productRoute_1 = __importDefault(require("./Services/productService/productRoute"));
+const wishlistRoute_1 = __importDefault(require("./Services/wishlistService/wishlistRoute"));
 // console.log("connection",typeof userRoute)
 // console.log("connection",userRoute)
 const app = (0, express_1.default)();
@@ -18,6 +19,7 @@ app.use(express_1.default.json());
 app.use('/userService', userRoute_1.default);
 app.use('/categoryService', categoryRoute_1.default);
 app.use('/productService', productRoute_1.default);
+app.use('/wishlistService', wishlistRoute_1.default);
 app.listen(PORT, () => {
     console.table([`listening on ${Hostname}: ${PORT}`]);
 });

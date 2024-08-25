@@ -1,7 +1,6 @@
 import { Wishlist } from "../Interfaces/wishlistInterface";
 
-export const createWishlist : string = `INSERT INTO wishlist(wishlist_id,product_id) 
-                                        VALUES(?,?)`;
+export const createWishlist : string = `INSERT INTO wishlist (wishlist_id,product_id) VALUES(?,?)`;
 
 export const readAllWishlist : string = `SELECT * FROM wishlist`;
 
